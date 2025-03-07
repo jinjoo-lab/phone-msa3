@@ -37,9 +37,6 @@ public class Window {
     public void onPostPersist() {
         LostReported lostReported = new LostReported(this);
         lostReported.publishAfterCommit();
-
-        LostCanceled lostCanceled = new LostCanceled(this);
-        lostCanceled.publishAfterCommit();
     }
 
     @PostUpdate
@@ -49,6 +46,12 @@ public class Window {
 
         LockRequested lockRequested = new LockRequested(this);
         lockRequested.publishAfterCommit();
+    }
+
+    @PostRemove
+    public void onPostRemove() {
+        LostCanceled lostCanceled = new LostCanceled(this);
+        lostCanceled.publishAfterCommit();
     }
 
     public static WindowRepository repository() {
