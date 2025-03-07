@@ -41,22 +41,6 @@ public class PolicyHandler {
 
     @StreamListener(
         value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='LostReported'"
-    )
-    public void wheneverLostReported_LocationSearch(
-        @Payload LostReported lostReported
-    ) {
-        LostReported event = lostReported;
-        System.out.println(
-            "\n\n##### listener LocationSearch : " + lostReported + "\n\n"
-        );
-
-        // Sample Logic //
-        Work.locationSearch(event);
-    }
-
-    @StreamListener(
-        value = KafkaProcessor.INPUT,
         condition = "headers['type']=='DataDeleteRequested'"
     )
     public void wheneverDataDeleteRequested_DataDelete(
